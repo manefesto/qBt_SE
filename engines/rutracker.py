@@ -86,8 +86,8 @@ class EngineError(Exception):
 
 @dataclass
 class Config:
-    username: str = "USERNAME"
-    password: str = "PASSWORD"
+    #username: str = "USERNAME"
+    #password: str = "PASSWORD"
     proxy: bool = False
     # dynamic_proxy: bool = True
     proxies: dict = field(default_factory=lambda: {"http": "", "https": ""})
@@ -174,13 +174,13 @@ class Rutracker:
         page, torrents_found = self._request(query).decode("cp1251"), -1
         if first:
             # check login status
-            if "log-out-icon" not in page:
-                if "login-form-full" not in page:
-                    raise EngineError("Unexpected page content")
-                logger.debug("Looks like we lost session id, lets login")
-                self.login()
-                # retry request because guests cant search
-                page = self._request(query).decode("cp1251")
+            #if "log-out-icon" not in page:
+            #    if "login-form-full" not in page:
+            #        raise EngineError("Unexpected page content")
+            #    logger.debug("Looks like we lost session id, lets login")
+            #    self.login()
+            #    # retry request because guests cant search
+            #    page = self._request(query).decode("cp1251")
             # firstly we check if there is a result
             try:
                 torrents_found = int(RE_RESULTS.search(page)[1])
